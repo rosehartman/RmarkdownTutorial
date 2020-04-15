@@ -1,0 +1,107 @@
+---
+title: "R Markdown Tutorial"
+author: "Rosemary Hartman and Sarah Perry"
+date: "4/15/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+Why use R Markdown?
+
+* Break up your code into "chunks" that can be run individually.
+* Save code and output together in one document.
+* Share code and results with others.
+* Easily create automated reports.
+
+
+## Structure of an R Markdown document
+
+* Metadata
+* Markdown
+* Code chunks
+
+### Metadata
+
+
+Rmd files include a metadata section (typically located at the top of the file) that can specify (among other things) the title, author, and date of the document. Metadata adheres to the YAML format and is delimited by lines containing three dashes (`---`).  If you create the document with R Studio, it creates most of it for you. 
+
+
+### Markdown
+
+The "markdown" part of the document, is where you can put all your comments, but unlike commenting in an R script, you don't have to begin every line with a hashtag and you can do fancier formatting.
+
+We can look at R Studio's R Markdown Cheat Sheet for help.
+
+Lots more formatting help in this guide: https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet 
+
+
+### Code Chunks
+
+
+```{r cars}
+summary(cars)
+```
+
+The part in front of the code chunk between the curly braces is where you can specify your chunk options. Some important ones:
+
+* echo=True - Print the code
+* echo=False - Don't print the code (but do evaluate it)
+* eval=False - don't evaluate the code (but do print it)
+
+When you are creating reports, the chunk options are also where you can define figure size, font alignment, etc.
+
+See all options here: https://yihui.org/knitr/options/
+
+So, if I wanted to create a report to send to my friend for help with my code, I might write a chunk that says:
+
+```{r echo=T}
+
+#I need help with my code!
+x = c(1,2,3,4)
+y = c(5,6,7,8)
+
+plot(x,y)
+
+```
+
+However, if I wanted to just send the graph to my supervisor, I would do it:
+
+```{r echo=FALSE}
+
+#I need help with my code!
+x = c(1,2,3,4)
+y = c(5,6,7,8)
+
+plot(x,y)
+
+```
+
+
+## Publishing
+
+R Studio makes it really easy to turn your script into a real report. Just hit the **knit** button on the top  of the document. The drop-down menu gives you the option to publish it as HTML, PDF, or Word. HTML works really well. PDF and Word isn't quite as nice.
+
+## More advanced stuff
+
+To create really nice automated reports, you can load data automatically and produce the graph right in the document.
+
+Notice that I have `echo=FALSE` and `warning=FALSE` so that you just get the graph, not the code to produce the graph in the final report.
+
+```{r echo=FALSE, warning=FALSE, fig.cap="Graph of FMWT Delta Smelt Index"}
+FMWT = read.csv("ftp://ftp.wildlife.ca.gov/TownetFallMidwaterTrawl/FMWT%20Data/FMWTindices.csv", stringsAsFactors = F)
+library(ggplot2)
+ggplot(FMWT, aes(x=Year, y=Delta.Smelt)) + 
+  geom_bar(stat = "identity")+
+  ylab("Delta Smelt Index")
+
+```
+
+
+
