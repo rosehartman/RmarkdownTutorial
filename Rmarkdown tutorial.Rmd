@@ -104,4 +104,13 @@ ggplot(FMWT, aes(x=Year, y=Delta.Smelt)) +
 ```
 
 
+For example, I made the IEP Seasonal Monitoring Report using RMarkdown and Bookdown.
+https://interagencyecologicalprogram.github.io/Status-and-Trends/ 
 
+Other cool things you can do include
+
+plotly
+
+leaflet
+
+GitHub pages
