@@ -3,7 +3,10 @@ title: "R Markdown Tutorial"
 author: "Rosemary Hartman and Sarah Perry"
 date: "4/15/2020"
 output:
-  html_document: default
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: show
   pdf_document: default
 ---
 
@@ -32,7 +35,25 @@ Why use R Markdown?
 ### Metadata
 
 
-Rmd files include a metadata section (typically located at the top of the file) that can specify (among other things) the title, author, and date of the document. Metadata adheres to the YAML format and is delimited by lines containing three dashes (`---`).  If you create the document with R Studio, it creates most of it for you. 
+Rmd files include a metadata section, also known as a "YAML header" (typically located at the top of the file) that can specify (among other things) the title, author, and date of the document. Metadata adheres to the YAML format and is delimited by lines containing three dashes (`---`).  If you create the document with R Studio, it creates most of it for you. 
+
+The metadata is also where you can specify some of the output parameters, including font size, font style, output format, whether to have a table-of-contents, etc. Some particularly useful things are "toc: true" which puts a table-of-contents on your document and "code-folding: show" which allows someone to hide the code chunks.
+
+The YAML header of this document looks like this:
+```{r eval=FALSE}
+---
+title: "R Markdown Tutorial"
+author: "Rosemary Hartman and Sarah Perry"
+date: "4/15/2020"
+output:
+  pdf_document: default
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: show
+---
+```
+
 
 
 ### Markdown
@@ -91,6 +112,22 @@ plot(x,y)
 
 R Studio makes it really easy to turn your script into a real report. Just hit the **knit** button on the top  of the document. The drop-down menu gives you the option to publish it as HTML, PDF, or Word. HTML works really well. PDF and Word isn't quite as nice.
 
+If you want to publish as a PDF, you have to install LaTex, which is a typsetting system (https://www.latex-project.org/). The package `tinytex` will install it for you.
+
+```{r eval=FALSE}
+
+#Load the tinytex R package
+install.packages('tinytex')
+
+#Now install LaTex. This will take a while
+tinytex::install_tinytex()
+```
+
+
+Now you can knit to PDF!
+
+
+
 ## More advanced stuff
 
 To create really nice automated reports, you can load data automatically and produce the graph right in the document.
@@ -137,13 +174,9 @@ m <- leaflet() %>%
 m  # Print the map
 ```
 
+**Bookdown** can automatically put together multiple R Markdown documents into a single web page.
+
 For example, I made the IEP Seasonal Monitoring Report using RMarkdown and Bookdown.
 https://interagencyecologicalprogram.github.io/Status-and-Trends/ 
 
-Other cool things you can do include
 
-plotly
-
-leaflet
-
-GitHub pages
