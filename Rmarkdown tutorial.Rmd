@@ -42,6 +42,7 @@ The "markdown" part of the document, is where you can put all your comments, but
 We can look at R Studio's R Markdown Cheat Sheet for help.
 
 Lots more formatting help in this guide: https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet 
+Another good resource: https://bookdown.org/yihui/rmarkdown-cookbook/
 
 
 ### Code Chunks
