@@ -137,3 +137,13 @@ m <- leaflet() %>%
 m  # Print the map
 ```
 
+For example, I made the IEP Seasonal Monitoring Report using RMarkdown and Bookdown.
+https://interagencyecologicalprogram.github.io/Status-and-Trends/ 
+
+Other cool things you can do include
+
+plotly
+
+leaflet
+
+GitHub pages
