@@ -2,7 +2,9 @@
 title: "R Markdown Tutorial"
 author: "Rosemary Hartman and Sarah Perry"
 date: "4/15/2020"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -40,6 +42,7 @@ The "markdown" part of the document, is where you can put all your comments, but
 We can look at R Studio's R Markdown Cheat Sheet for help.
 
 Lots more formatting help in this guide: https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet 
+Another good resource: https://bookdown.org/yihui/rmarkdown-cookbook/
 
 
 ### Code Chunks
@@ -103,6 +106,36 @@ ggplot(FMWT, aes(x=Year, y=Delta.Smelt)) +
 
 ```
 
+You can modify the position, height, and width of the plot by using the `fig.align`, `fig.height`, and `fig.width` chunk options. Here, I have set `fig.align = 'center'`, `fig.width = 7`, `fight.height = 7`.
+
+```{r echo=FALSE, warning=FALSE, fig.align='center', fig.height=7, fig.width=7}
+FMWT = read.csv("ftp://ftp.wildlife.ca.gov/TownetFallMidwaterTrawl/FMWT%20Data/FMWTindices.csv", stringsAsFactors = F)
+library(ggplot2)
+ggplot(FMWT, aes(x=Year, y=Delta.Smelt)) + 
+  geom_bar(stat = "identity") +
+  ylab("Delta Smelt Index")
+```
+
+In addition, you can use the **Plotly** package to create interactive, publication-quality graphs, as shown below.
+
+```{r message = FALSE, warning = FALSE}
+library(plotly)
+
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length)
+
+fig
+```
+
+**Leaflet**, meanwhile, can be used to make interactive maps.
+
+```{r message = FALSE, warning = FALSE}
+library(leaflet)
+
+m <- leaflet() %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(lng=174.768, lat=-36.852, popup="The birthplace of R")
+m  # Print the map
+```
 
 For example, I made the IEP Seasonal Monitoring Report using RMarkdown and Bookdown.
 https://interagencyecologicalprogram.github.io/Status-and-Trends/ 
